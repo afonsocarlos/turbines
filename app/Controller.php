@@ -2,15 +2,6 @@
 
 namespace App;
 
-$path = $_SERVER['PATH_INFO'];
-
-if ($path = '/address')
-{
-  $controller = new Controller();
-  $return = $controller->ex();
-  echo $return;
-}
-
 class Controller
 {
   protected $addresses = [];
