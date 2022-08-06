@@ -7,7 +7,7 @@ use App\TurbineController;
 
 $path = $_SERVER['PATH_INFO'];
 
-if ($path = '/address')
+if ($path == '/address')
 {
   $controller = new TurbineController();
   $return = $controller->ex($_GET['id']);
