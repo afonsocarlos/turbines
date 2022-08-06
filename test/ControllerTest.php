@@ -10,9 +10,8 @@ class ControllerTest extends TestCase
     public function testEx()
     {
         $_SERVER['PATH_INFO'] = '/address';
-        $_GET['id'] = 0;
         $controller = new Controller();
-        $response = $controller->ex();
+        $response = $controller->ex(0);
         $this->assertEquals('["Amaral1-1"," Gamesa"," 39.026628121"]', $response);
     }
 }

@@ -6,10 +6,10 @@ class Controller
 {
   protected $addresses = [];
 
-  function ex()
+  function ex(int $id)
   {
     $this->rcd();
-    $id = $_GET['id'];
+    $id = $id;
     $address = $this->addresses[$id];
     return json_encode($address);
   }
