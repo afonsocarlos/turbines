@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Controller
+class TurbineController
 {
   protected $addresses = [];
 
