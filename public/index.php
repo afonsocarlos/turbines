@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\TurbineController;
+use App\Controllers\TurbineController;
 
 
 $path = $_SERVER['PATH_INFO'];

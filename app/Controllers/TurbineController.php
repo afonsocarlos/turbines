@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Controllers;
 
 class TurbineController
 {
@@ -35,7 +35,7 @@ class TurbineController
      */
     private function loadTurbinesData() : void
     {
-        $file = fopen(__DIR__ . '/../turbines.csv', 'r');
+        $file = fopen(__DIR__ . '/../../turbines.csv', 'r');
         while (($line = fgetcsv($file)) !== FALSE) {
             $this->addresses[] = [
                 $line[0],

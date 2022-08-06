@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Test;
+namespace App\Test\Controllers;
 
-use App\TurbineController;
 use PHPUnit\Framework\TestCase;
+use App\Controllers\TurbineController;
 
 class TurbineControllerTest extends TestCase
 {
