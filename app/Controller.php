@@ -16,7 +16,7 @@ class Controller
 
   function rcd()
   {
-    $file = fopen('turbines.csv', 'r');
+    $file = fopen(__DIR__ . '/../turbines.csv', 'r');
     while (($line = fgetcsv($file)) !== FALSE) {
         $this->addresses[] = [
             $line[0],
