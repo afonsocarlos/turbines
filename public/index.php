@@ -9,8 +9,8 @@ $path = $_SERVER['PATH_INFO'];
 
 if ($path == '/address')
 {
-  $controller = new TurbineController();
-  $return = $controller->ex($_GET['id']);
-  echo $return;
+    $controller = new TurbineController();
+    $return = $controller->getTurbineData($_GET['id']);
+    echo $return;
 }
 
