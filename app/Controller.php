@@ -1,11 +1,12 @@
 <?php
 
-$path = $_SERVER['PATH_INFO'];
+namespace App;
 
+$path = $_SERVER['PATH_INFO'];
 
 if ($path = '/address')
 {
-  $controller = new \Controller();
+  $controller = new Controller();
   $return = $controller->ex();
   echo $return;
 }
