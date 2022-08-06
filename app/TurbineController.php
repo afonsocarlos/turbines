@@ -11,12 +11,28 @@ class TurbineController
         $this->loadTurbinesData();
     }
 
+    /**
+     * @author Carlos Afonso
+     * @date 2022-08-06
+     *
+     * @param int $id
+     *
+     * Returns the data from a turbine specified address.
+     *
+     * @return string
+     */
     public function getTurbineData(int $id) : string
     {
         $address = $this->addresses[$id];
         return json_encode($address);
     }
 
+    /**
+     * @author Carlos Afonso
+     * @date 2022-08-06
+     *
+     * Load turbines data into $addresses
+     */
     private function loadTurbinesData() : void
     {
         $file = fopen(__DIR__ . '/../turbines.csv', 'r');
