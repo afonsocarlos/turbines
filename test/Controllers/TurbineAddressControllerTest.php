@@ -3,9 +3,9 @@
 namespace App\Test\Controllers;
 
 use PHPUnit\Framework\TestCase;
-use App\Controllers\TurbineController;
+use App\Controllers\TurbineAddressController;
 
-class TurbineControllerTest extends TestCase
+class TurbineAddressControllerTest extends TestCase
 {
     /**
      * @author Carlos Afonso
@@ -15,7 +15,7 @@ class TurbineControllerTest extends TestCase
      */
     public function testLoadTurbinesData()
     {
-        $turbineController = new TurbineController();
+        $turbineController = new TurbineAddressController();
         $this->assertEquals(5, count($turbineController->getAddresses()));
     }
 
@@ -27,7 +27,7 @@ class TurbineControllerTest extends TestCase
      */
     public function testGetCorrectTurbineData()
     {
-        $turbineController = new TurbineController();
+        $turbineController = new TurbineAddressController();
         $response = $turbineController->getTurbineData(0);
         $this->assertEquals('["Amaral1-1"," Gamesa"," 39.026628121"]', $response);
     }
@@ -40,7 +40,7 @@ class TurbineControllerTest extends TestCase
      */
     public function testGetWrongTurbineData()
     {
-        $turbineController = new TurbineController();
+        $turbineController = new TurbineAddressController();
         $response = $turbineController->getTurbineData(0);
         $this->assertNotEquals('["Amaral1-2"," Wrong output"," 3.141592653"]', $response);
     }

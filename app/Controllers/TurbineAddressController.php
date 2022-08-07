@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class TurbineController
+class TurbineAddressController
 {
     protected array $addresses = [];
 
