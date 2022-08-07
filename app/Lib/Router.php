@@ -14,15 +14,16 @@ class Router
      *
      * Method responsible for routing GET requests.
      *
-     * @return mixed
+     * @return void
      */
-    public static function get($path, $callback) : mixed
+    public static function get($path, $callback) : void
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
             throw new MethodNotAllowedHttpException();
         }
 
-        return $callback();
+        $response = self::route($path, $callback);
+        self::response($response);
     }
 
     /**
@@ -33,15 +34,16 @@ class Router
      *
      * Method responsible for routing POST requests.
      *
-     * @return mixed
+     * @return void
      */
-    public static function post($path, $callback) : mixed
+    public static function post($path, $callback) : void
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
             throw new MethodNotAllowedHttpException();
         }
 
-        return $callback();
+        $response = self::route($path, $callback);
+        self::response($response);
     }
 
     /**
@@ -73,4 +75,23 @@ class Router
 
         return null;
     }
+
+    /**
+     * @author Carlos Afonso
+     * @date 2022-08-07
+     * @param array|object|string $response
+     *
+     * Method responsible for sending the response.
+     *
+     * @return void
+     */
+    private static function response($response) : void
+    {
+        if (is_string($response)) {
+            echo $response;
+        } elseif (is_array($response) || is_object($response)) {
+            echo json_encode($response);
+        }
+    }
+
 }

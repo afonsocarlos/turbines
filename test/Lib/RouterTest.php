@@ -9,13 +9,38 @@ use App\Lib\Router;
 
 class RouterTest extends TestCase
 {
-    public function testGet()
+    public function testGetStringResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/address/test';
-        $this->assertEquals('Hello World', Router::get('/address/test', function() {
+        $this->expectOutputString('Hello World');
+        Router::get('/address/test', function() {
             return 'Hello World';
-        }));
+        });
+    }
+
+    public function testGetJsonResponse()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $response = [
+            'status' => 'success',
+            'message' => 'Hello World',
+        ];
+
+        // Test with array
+        $this->expectOutputString('{"status":"success","message":"Hello World"}');
+        Router::get('/address/test', function() use ($response) {
+            return $response;
+        });
+
+        // clear output buffer
+        ob_clean();
+
+        // Test with object
+        Router::get('/address/test', function() use ($response) {
+            return (object) $response;
+        });
     }
 
     public function testGetWrongHttpMethod()
@@ -29,13 +54,38 @@ class RouterTest extends TestCase
         });
     }
 
-    public function testPost()
+    public function testPostStringResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_SERVER['REQUEST_URI'] = '/address/test';
-        $this->assertEquals('Hello World', Router::post('/address/test', function() {
+        $this->expectOutputString('Hello World');
+        Router::post('/address/test', function() {
             return 'Hello World';
-        }));
+        });
+    }
+
+    public function testPostJsonResponse()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $response = [
+            'status' => 'success',
+            'message' => 'Hello World',
+        ];
+
+        // Test with array
+        $this->expectOutputString('{"status":"success","message":"Hello World"}');
+        Router::post('/address/test', function() use ($response) {
+            return $response;
+        });
+
+        // clear output buffer
+        ob_clean();
+
+        // Test with object
+        Router::post('/address/test', function() use ($response) {
+            return (object) $response;
+        });
     }
 
     public function testPostWrongHttpMethod()
