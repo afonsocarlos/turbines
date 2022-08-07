@@ -4,9 +4,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Controllers\TurbineAddressController;
 use App\Lib\Router;
+use App\Lib\App;
 
 
-$path = $_SERVER['PATH_INFO'];
+App::run();
 
 Router::get('/address/([0-9]*)', function($param) {
     $controller = new TurbineAddressController();
