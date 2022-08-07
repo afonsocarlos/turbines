@@ -12,11 +12,15 @@ class Router
      *
      * Method responsible for routing GET requests.
      *
-     * @return void
+     * @return mixed
      */
-    public static function get($path, $callback) : void
+    public static function get($path, $callback) : mixed
     {
-        //
+        if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
+            return null;
+        }
+
+        return $callback();
     }
 
     /**
@@ -27,10 +31,14 @@ class Router
      *
      * Method responsible for routing POST requests.
      *
-     * @return void
+     * @return mixed
      */
-    public static function post($path, $callback) : void
+    public static function post($path, $callback) : mixed
     {
-        //
+        if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
+            return null;
+        }
+
+        return $callback();
     }
 }

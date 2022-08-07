@@ -16,6 +16,8 @@ class RouterTest extends TestCase
      */
     public function testGet()
     {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/address/test';
         $this->assertEquals('Hello World', Router::get('/address', function() {
             return 'Hello World';
         }));
@@ -29,6 +31,8 @@ class RouterTest extends TestCase
      */
     public function testPost()
     {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_URI'] = '/address/test';
         $this->assertEquals('Hello World', Router::post('/address', function() {
             return 'Hello World';
         }));
