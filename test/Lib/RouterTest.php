@@ -4,6 +4,7 @@ namespace App\Test\Lib;
 
 use PHPUnit\Framework\TestCase;
 use App\Exceptions\MethodNotAllowedHttpException;
+use App\Exceptions\NotFoundHttpException;
 use App\Lib\Router;
 
 
@@ -124,4 +125,16 @@ class RouterTest extends TestCase
             return $params;
         }));
     }
+
+    public function testNoRouteFound()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $this->expectException(NotFoundHttpException::class);
+        Router::route('/address/([0-9]+)', function() {
+            return 'Hello World';
+        });
+        Router::handleNotFound();
+    }
+
 }

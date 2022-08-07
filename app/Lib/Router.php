@@ -3,9 +3,12 @@
 namespace App\Lib;
 
 use App\Exceptions\MethodNotAllowedHttpException;
+use App\Exceptions\NotFoundHttpException;
 
 class Router
 {
+    private static bool $matchedRoute = false;
+
     /**
      * @author Carlos Afonso
      * @date 2022-08-06
@@ -66,6 +69,9 @@ class Router
             // first match usually is the route itself
             array_shift($matches);
 
+            // flag that a route has been matched
+            self::$matchedRoute = true;
+
             // get params from the route
             $params = array_map(function($param) {
                 return $param[0];
@@ -91,6 +97,18 @@ class Router
             echo $response;
         } elseif (is_array($response) || is_object($response)) {
             echo json_encode($response);
+        }
+    }
+
+    /**
+     * undocumented function
+     *
+     * @return void
+     */
+    public static function handleNotFound()
+    {
+        if (!self::$matchedRoute) {
+            throw new NotFoundHttpException();
         }
     }
 

@@ -13,3 +13,5 @@ Router::get('/address/([0-9]*)', function($param) {
     $return = $controller->getTurbineData($param[0]);
     echo $return;
 });
+
+Router::handleNotFound();
