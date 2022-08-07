@@ -62,15 +62,15 @@ class RouterTest extends TestCase
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/address/test';
-        $this->assertEquals('Hello World', Router::route('/address', function() {
+        $this->assertNull(Router::route('/address/([0-9]+)', function() {
             return 'Hello World';
         }));
     }
 
     public function testRoutePathParsing()
     {
-        $_SERVER['REQUEST_URI'] = '/address/test';
-        $this->assertEquals(['address', 'test'], Router::route('/address/test', function($params) {
+        $_SERVER['REQUEST_URI'] = '/address/test/1';
+        $this->assertEquals(['test', '1'], Router::route('/address/([a-z]*)/([0-9]+)', function($params) {
             return $params;
         }));
     }
