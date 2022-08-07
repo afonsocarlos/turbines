@@ -43,4 +43,19 @@ class Router
 
         return $callback();
     }
+
+    /**
+     * @author Carlos Afonso
+     * @date 2022-08-07
+     * @param string $path
+     * @param closure $callback
+     *
+     * Method responsible for handling requests.
+     *
+     * @return mixed
+     */
+    public static function route($path, $callback) : mixed
+    {
+        //
+    }
 }

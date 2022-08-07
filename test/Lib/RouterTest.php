@@ -49,4 +49,29 @@ class RouterTest extends TestCase
         });
     }
 
+    public function testRouteReturnsExcpectedResponse()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $this->assertEquals('Hello World', Router::route('/address/test', function() {
+            return 'Hello World';
+        }));
+    }
+
+    public function testNotExistingRoute()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $this->assertEquals('Hello World', Router::route('/address', function() {
+            return 'Hello World';
+        }));
+    }
+
+    public function testRoutePathParsing()
+    {
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $this->assertEquals(['address', 'test'], Router::route('/address/test', function($params) {
+            return $params;
+        }));
+    }
 }
