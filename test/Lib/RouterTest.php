@@ -3,17 +3,12 @@
 namespace App\Test\Lib;
 
 use PHPUnit\Framework\TestCase;
+use App\Exceptions\MethodNotAllowedHttpException;
 use App\Lib\Router;
 
 
 class RouterTest extends TestCase
 {
-    /**
-     * @author Carlos Afonso
-     * @date 2022-08-06
-     *
-     * Test if the router is able to route GET requests.
-     */
     public function testGet()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -23,12 +18,6 @@ class RouterTest extends TestCase
         }));
     }
 
-    /**
-     * @author Carlos Afonso
-     * @date 2022-08-06
-     *
-     * Test if the router is able to route GET requests.
-     */
     public function testGetWrongHttpMethod()
     {
         $_SERVER['REQUEST_METHOD'] = 'PUT';
@@ -40,12 +29,6 @@ class RouterTest extends TestCase
         });
     }
 
-    /**
-     * @author Carlos Afonso
-     * @date 2022-08-06
-     *
-     * Test if the router is able to route POST requests.
-     */
     public function testPost()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
@@ -55,12 +38,6 @@ class RouterTest extends TestCase
         }));
     }
 
-    /**
-     * @author Carlos Afonso
-     * @date 2022-08-06
-     *
-     * Test if the router is able to route POST requests.
-     */
     public function testPostWrongHttpMethod()
     {
         $_SERVER['REQUEST_METHOD'] = 'PUT';

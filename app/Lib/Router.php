@@ -2,6 +2,8 @@
 
 namespace App\Lib;
 
+use App\Exceptions\MethodNotAllowedHttpException;
+
 class Router
 {
     /**
@@ -17,7 +19,7 @@ class Router
     public static function get($path, $callback) : mixed
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
-            return null;
+            throw new MethodNotAllowedHttpException();
         }
 
         return $callback();
@@ -36,7 +38,7 @@ class Router
     public static function post($path, $callback) : mixed
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
-            return null;
+            throw new MethodNotAllowedHttpException();
         }
 
         return $callback();
