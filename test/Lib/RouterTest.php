@@ -10,6 +10,9 @@ use App\Lib\Router;
 
 class RouterTest extends TestCase
 {
+    /**
+     * @runInSeparateProcess
+     */
     public function testGetStringResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -20,6 +23,9 @@ class RouterTest extends TestCase
         });
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testGetJsonResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -55,6 +61,9 @@ class RouterTest extends TestCase
         });
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testPostStringResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
@@ -65,6 +74,9 @@ class RouterTest extends TestCase
         });
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testPostJsonResponse()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
@@ -126,6 +138,9 @@ class RouterTest extends TestCase
         }));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testNoRouteFound()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
