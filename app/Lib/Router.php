@@ -24,7 +24,7 @@ class Router
     public static function get($path, $callback) : void
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'GET') !== 0) {
-            throw new MethodNotAllowedHttpException();
+            return;
         }
 
         $response = self::route($path, $callback);
@@ -44,7 +44,7 @@ class Router
     public static function post($path, $callback) : void
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') !== 0) {
-            throw new MethodNotAllowedHttpException();
+            return;
         }
 
         $response = self::route($path, $callback);
@@ -64,7 +64,7 @@ class Router
     public static function put($path, $callback) : void
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT') !== 0) {
-            throw new MethodNotAllowedHttpException();
+            return;
         }
 
         $response = self::route($path, $callback);
@@ -84,7 +84,7 @@ class Router
     public static function delete($path, $callback) : void
     {
         if (strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE') !== 0) {
-            throw new MethodNotAllowedHttpException();
+            return;
         }
 
         $response = self::route($path, $callback);
