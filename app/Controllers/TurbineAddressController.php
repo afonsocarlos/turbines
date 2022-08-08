@@ -63,6 +63,11 @@ class TurbineAddressController extends Controller
     public function store(Request $request) : mixed
     {
         $data = $request->getParams();
+
+        if (!$this->validate($data)) {
+            return Response::toJson(['message' => 'Invalid data'], 400);
+        }
+
         $address = $this->turbineAddressModel->create($data);
         return Response::toJson($address, 201);
     }
@@ -81,6 +86,11 @@ class TurbineAddressController extends Controller
     {
         $id = $request->getSegment(0);
         $data = $request->getParams();
+
+        if (!$this->validate($data)) {
+            return Response::toJson(['message' => 'Invalid data'], 400);
+        }
+
         $updated = $this->turbineAddressModel->update($id, $data);
         if ($updated) {
             return Response::toJson(['message' => 'Address updated'], 200);
@@ -105,6 +115,25 @@ class TurbineAddressController extends Controller
             return Response::toJson(['message' => 'Address deleted'], 200);
         }
         return Response::toJson(['message' => 'Address not found'], 404);
+    }
+
+    /**
+     * @author Carlos Afonso
+     * @date 2022-08-08
+     *
+     * @param array $data
+     *
+     * Validates the data.
+     *
+     * @return bool
+     */
+    private function validate(array $data) : bool
+    {
+        return isset($data['name']) && (
+            isset($data['description']) ||
+            isset($data['latitude']) ||
+            isset($data['longitude'])
+        );
     }
 
 }
