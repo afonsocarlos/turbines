@@ -52,6 +52,46 @@ class Router
 
     /**
      * @author Carlos Afonso
+     * @date 2022-08-08
+     * @param string $path
+     * @param closure $callback
+     *
+     * Method responsible for routing PUT requests.
+     *
+     * @return void
+     */
+    public static function put($path, $callback) : void
+    {
+        if (strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT') !== 0) {
+            throw new MethodNotAllowedHttpException();
+        }
+
+        $response = self::route($path, $callback);
+        self::response($response);
+    }
+
+    /**
+     * @author Carlos Afonso
+     * @date 2022-08-08
+     * @param string $path
+     * @param closure $callback
+     *
+     * Method responsible for routing DELETE requests.
+     *
+     * @return void
+     */
+    public static function delete($path, $callback) : void
+    {
+        if (strcasecmp($_SERVER['REQUEST_METHOD'], 'DELETE') !== 0) {
+            throw new MethodNotAllowedHttpException();
+        }
+
+        $response = self::route($path, $callback);
+        self::response($response);
+    }
+
+    /**
+     * @author Carlos Afonso
      * @date 2022-08-07
      * @param string $path
      * @param closure $callback
@@ -104,11 +144,14 @@ class Router
     }
 
     /**
-     * undocumented function
+     * @author Carlos Afonso
+     * @date 2022-08-07
+     *
+     * Method responsible for handling NotFoundHttpException.
      *
      * @return void
      */
-    public static function handleNotFound()
+    public static function handleNotFound(): void
     {
         if (!self::$matchedRoute) {
             throw new NotFoundHttpException();

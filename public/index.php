@@ -14,5 +14,7 @@ $controller = new TurbineAddressController();
 Router::post('/address', [$controller, 'store']);
 Router::get('/address', [$controller, 'index']);
 Router::get('/address/([0-9]*)', [$controller, 'show']);
+Router::put('/address/([0-9]*)', [$controller, 'update']);
+Router::delete('/address/([0-9]*)', [$controller, 'destroy']);
 
 Router::handleNotFound();
