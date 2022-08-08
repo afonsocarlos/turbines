@@ -36,8 +36,12 @@ class TurbineAddressController extends Controller
      */
     public function show(Request $request) : mixed
     {
-        $address = TurbineAddressModel::find($request->getSegment(0));
-        return Response::toJson($address, 200);
+        $id = $request->getSegment(0);
+        $address = TurbineAddressModel::find($id);
+        if ($address) {
+            return Response::toJson($address, 200);
+        }
+        return Response::toJson(['message' => 'Address not found'], 404);
     }
 
     /**
