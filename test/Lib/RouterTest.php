@@ -35,7 +35,7 @@ class RouterTest extends TestCase
     public function testGetWrongHttpMethod()
     {
         $method = 'GET';
-        $this->testWrongHttpMethod($method, strtolower($method));
+        $this->testWrongHttpMethod('POST', strtolower($method));
     }
 
     /**
@@ -62,7 +62,61 @@ class RouterTest extends TestCase
     public function testPostWrongHttpMethod()
     {
         $method = 'POST';
-        $this->testWrongHttpMethod($method, strtolower($method));
+        $this->testWrongHttpMethod('PUT', strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPutStringResponse()
+    {
+        $method = 'PUT';
+        $this->testStringResponse($method, strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPutJsonResponse()
+    {
+        $method = 'PUT';
+        $this->testJsonResponse($method, strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPutWrongHttpMethod()
+    {
+        $method = 'PUT';
+        $this->testWrongHttpMethod('DELETE', strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testDeleteStringResponse()
+    {
+        $method = 'DELETE';
+        $this->testStringResponse($method, strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testDeleteJsonResponse()
+    {
+        $method = 'DELETE';
+        $this->testJsonResponse($method, strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testDeleteWrongHttpMethod()
+    {
+        $method = 'DELETE';
+        $this->testWrongHttpMethod('GET', strtolower($method));
     }
 
     private function testStringResponse(string $httpMethod, string $method)
