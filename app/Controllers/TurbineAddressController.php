@@ -3,12 +3,12 @@
 namespace App\Controllers;
 
 use App\Lib\Request;
+use App\Lib\Response;
+use App\Models\TurbineAddressModel;
 
 
 class TurbineAddressController extends Controller
 {
-    protected array $addresses = [];
-
     public function __construct()
     {
         $this->loadTurbinesData();
@@ -39,8 +39,8 @@ class TurbineAddressController extends Controller
      */
     public function show(Request $request) : mixed
     {
-        $address = $this->addresses[$request->getSegment(0)];
-        return $address;
+        $address = TurbineAddressModel::find($request->getSegment(0));
+        return Response::toJson($address, 200);
     }
 
     /**

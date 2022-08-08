@@ -5,6 +5,7 @@ namespace App\Lib;
 use App\Exceptions\MethodNotAllowedHttpException;
 use App\Exceptions\NotFoundHttpException;
 use App\Lib\Request;
+use App\Lib\Response;
 
 class Router
 {
@@ -136,7 +137,10 @@ class Router
     {
         // TODO: pass the status code to the response
         header('Content-Type: application/json');
-        if (is_string($response)) {
+        if ($response instanceof Response) {
+            http_response_code($response->getStatusCode());
+            echo json_encode($response->getBody());
+        } elseif (is_string($response)) {
             echo $response;
         } elseif (is_array($response) || is_object($response)) {
             echo json_encode($response);

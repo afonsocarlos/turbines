@@ -13,7 +13,7 @@ class TurbineAddressModel extends Model
      */
     public static function find(int $id): mixed
     {
-        $stmt = self::$db->query('SELECT * FROM turbine_address WHERE id = :id');
+        $stmt = self::$db->query('SELECT * FROM turbine_addresses WHERE id = :id');
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
