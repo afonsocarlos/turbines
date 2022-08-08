@@ -19,6 +19,7 @@ class Request
 
     private function withParams(): void
     {
+        $params = [];
         if ($this->method === 'GET') {
             $inputType = INPUT_GET;
             $params = $_GET;
