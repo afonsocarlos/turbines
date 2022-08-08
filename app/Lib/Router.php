@@ -93,6 +93,8 @@ class Router
      */
     private static function response($response) : void
     {
+        // TODO: pass the status code to the response
+        header('Content-Type: application/json');
         if (is_string($response)) {
             echo $response;
         } elseif (is_array($response) || is_object($response)) {
