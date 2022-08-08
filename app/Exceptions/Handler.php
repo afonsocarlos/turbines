@@ -15,6 +15,7 @@ class Handler
 
     public static function handleException($exception)
     {
+        header('Content-Type: application/json');
         if ($exception instanceof NotFoundHttpException) {
             http_response_code(404);
             echo json_encode([
