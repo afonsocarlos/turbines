@@ -9,17 +9,6 @@ use App\Lib\Request;
 
 class TurbineAddressControllerTest extends TestCase
 {
-    /**
-     * @author Carlos Afonso
-     * @date 2022-08-06
-     *
-     * Tests getting turbines data from a csv file.
-     */
-    public function testLoadTurbinesData()
-    {
-        $turbineController = new TurbineAddressController();
-        $this->assertEquals(5, count($turbineController->getAddresses()));
-    }
 
     /**
      * @author Carlos Afonso
