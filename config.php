@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'database' => 'sqlite:' . __DIR__ . '/database/turbine.sqlite3',
+    'database' => 'sqlite:' . __DIR__ . '/database/turbines.sqlite3',
 ];
