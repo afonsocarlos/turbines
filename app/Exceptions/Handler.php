@@ -34,5 +34,7 @@ class Handler
                 'message' => 'Internal Server Error',
             ]);
         }
+
+        error_log($exception->getMessage());
     }
 }
