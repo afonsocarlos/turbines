@@ -36,6 +36,6 @@ class Handler
             ]);
         }
 
-        error_log($exception->getMessage());
+        error_log($exception->getMessage() . ' in ' . $exception->getFile() . ' on line ' . $exception->getLine());
     }
 }
