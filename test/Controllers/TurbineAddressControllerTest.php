@@ -5,10 +5,20 @@ namespace App\Test\Controllers;
 use PHPUnit\Framework\TestCase;
 use App\Controllers\TurbineAddressController;
 use App\Lib\Request;
+use App\Models\TurbineAddressModel;
 
 
 class TurbineAddressControllerTest extends TestCase
 {
+
+    protected function setUp(): void
+    {
+        $this->request = $this->createMock(Request::class);
+        $this->request->method('getSegment')->willReturn(0);
+
+        $this->model = $this->createMock(TurbineAddressModel::class);
+        $this->model->method('find')->willReturn(['name' => 'Amaral1-1', 'description' => 'Gamesa', 'latitude' => '39.026628121', 'longitude' => '-9.048632539']);
+    }
 
     /**
      * @author Carlos Afonso
@@ -16,14 +26,11 @@ class TurbineAddressControllerTest extends TestCase
      *
      * Tests getting turbines data from a csv file.
      */
-    public function testGetCorrectTurbineData()
+    public function testShow()
     {
-        $request = $this->createMock(Request::class);
-        $request->method('getSegment')->willReturn(0);
-
-        $turbineController = new TurbineAddressController();
-        $response = $turbineController->show($request);
-        $this->assertEquals(["Amaral1-1"," Gamesa"," 39.026628121"], $response);
+        $turbineController = new TurbineAddressController($this->model);
+        $response = $turbineController->show($this->request);
+        $this->assertEquals(['name' => 'Amaral1-1', 'description' => 'Gamesa', 'latitude' => '39.026628121', 'longitude' => '-9.048632539'], $response->getBody());
     }
 
     /**
@@ -34,11 +41,8 @@ class TurbineAddressControllerTest extends TestCase
      */
     public function testGetWrongTurbineData()
     {
-        $request = $this->createMock(Request::class);
-        $request->method('getSegment')->willReturn(0);
-
-        $turbineController = new TurbineAddressController();
-        $response = $turbineController->show($request);
+        $turbineController = new TurbineAddressController($this->model);
+        $response = $turbineController->show($this->request);
         $this->assertNotEquals(["Amaral1-2"," Wrong output"," 3.141592653"], $response);
     }
 

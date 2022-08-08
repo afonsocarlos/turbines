@@ -11,7 +11,7 @@ interface ModelInterface
      * Retrieve a record from the database by id.
      * @return mixed
      */
-    public static function find(int $id): mixed;
+    public function find(int $id): mixed;
 
     /**
      * @param int $id
@@ -19,7 +19,7 @@ interface ModelInterface
      * Retrieve all records from the database.
      * @return array
      */
-    public static function all(): array;
+    public function all(): array;
 
     /**
      * @param int $id
@@ -27,7 +27,7 @@ interface ModelInterface
      * Create a new record in the database.
      * @return mixed
      */
-    public static function create(array $data): mixed;
+    public function create(array $data): mixed;
 
     /**
      * @param int $id
@@ -35,7 +35,7 @@ interface ModelInterface
      * Update an existing record in the database.
      * @return bool
      */
-    public static function update(int $id, array $data): bool;
+    public function update(int $id, array $data): bool;
 
     /**
      * @param int $id
@@ -43,5 +43,5 @@ interface ModelInterface
      * Delete an existing record in the database.
      * @return bool
      */
-    public static function delete(int $id): bool;
+    public function delete(int $id): bool;
 }

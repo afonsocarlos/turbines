@@ -11,7 +11,7 @@ class TurbineAddressModel extends Model
      * Retrieve a record from the database by id.
      * @return mixed
      */
-    public static function find(int $id): mixed
+    public function find(int $id): mixed
     {
         $stmt = self::$db->query('SELECT * FROM turbine_addresses WHERE id = :id');
         $stmt->execute(['id' => $id]);
@@ -24,7 +24,7 @@ class TurbineAddressModel extends Model
      * Retrieve all records from the database.
      * @return array
      */
-    public static function all(): array
+    public function all(): array
     {
         $stmt = self::$db->query('SELECT * FROM turbine_addresses');
         $stmt->execute();
@@ -37,7 +37,7 @@ class TurbineAddressModel extends Model
      * Create a new record in the database.
      * @return mixed
      */
-    public static function create(array $data): mixed
+    public function create(array $data): mixed
     {
         $stmt = self::$db->prepare('INSERT INTO turbine_addresses (name, description, latitude, longitude) VALUES (:name, :description, :latitude, :longitude)');
         $stmt->execute([
@@ -55,7 +55,7 @@ class TurbineAddressModel extends Model
      * Update an existing record in the database.
      * @return bool
      */
-    public static function update(int $id, array $data): bool
+    public function update(int $id, array $data): bool
     {
         $address = self::find($id);
         $stmt = self::$db->prepare('UPDATE turbine_addresses SET name = :name, description = :description, latitude = :latitude, longitude = :longitude WHERE id = :id');
@@ -75,7 +75,7 @@ class TurbineAddressModel extends Model
      * Delete an existing record in the database.
      * @return bool
      */
-    public static function delete(int $id): bool
+    public function delete(int $id): bool
     {
         $stmt = self::$db->prepare('DELETE FROM turbine_addresses WHERE id = :id');
         $stmt->execute(['id' => $id]);

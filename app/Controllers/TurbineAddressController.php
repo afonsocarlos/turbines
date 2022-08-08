@@ -9,6 +9,12 @@ use App\Models\TurbineAddressModel;
 
 class TurbineAddressController extends Controller
 {
+    private TurbineAddressModel $turbineAddressModel;
+
+    public function __construct(TurbineAddressModel $turbineAddressModel = null)
+    {
+        $this->turbineAddressModel = $turbineAddressModel ?? new TurbineAddressModel();
+    }
 
     /**
      * @author Carlos Afonso
@@ -20,7 +26,7 @@ class TurbineAddressController extends Controller
      */
     public function index(Request $request): mixed
     {
-        $addresses = TurbineAddressModel::all();
+        $addresses = $this->turbineAddressModel->all();
         return Response::toJson($addresses, 200);
     }
 
@@ -37,7 +43,7 @@ class TurbineAddressController extends Controller
     public function show(Request $request) : mixed
     {
         $id = $request->getSegment(0);
-        $address = TurbineAddressModel::find($id);
+        $address = $this->turbineAddressModel->find($id);
         if ($address) {
             return Response::toJson($address, 200);
         }
@@ -57,7 +63,7 @@ class TurbineAddressController extends Controller
     public function store(Request $request) : mixed
     {
         $data = $request->getParams();
-        $address = TurbineAddressModel::create($data);
+        $address = $this->turbineAddressModel->create($data);
         return Response::toJson($address, 201);
     }
 
@@ -75,7 +81,7 @@ class TurbineAddressController extends Controller
     {
         $id = $request->getSegment(0);
         $data = $request->getParams();
-        $updated = TurbineAddressModel::update($id, $data);
+        $updated = $this->turbineAddressModel->update($id, $data);
         if ($updated) {
             return Response::toJson(['message' => 'Address updated'], 200);
         }
@@ -94,7 +100,7 @@ class TurbineAddressController extends Controller
      */
     public function destroy(Request $request) : mixed
     {
-        $deleted = TurbineAddressModel::delete($request->getSegment(0));
+        $deleted = $this->turbineAddressModel->delete($request->getSegment(0));
         if ($deleted) {
             return Response::toJson(['message' => 'Address deleted'], 200);
         }
