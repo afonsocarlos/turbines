@@ -12,7 +12,6 @@ class TurbineAddressModelTest extends TestCase
     {
         $this->db = $this->createMock(\PDO::class);
         $this->stmt = $this->createMock(\PDOStatement::class);
-        $this->db->method('query')->willReturn($this->stmt);
         TurbineAddressModel::setUp($this->db);
     }
 
@@ -24,12 +23,14 @@ class TurbineAddressModelTest extends TestCase
     {
         $this->db->method('query')->willReturn($this->stmt);
         $this->stmt->method('fetch')->willReturn(['name' => 'Amaral1-1', 'description' => 'Gamesa', 'latitude' => '39.026628121', 'longitude' => '-9.048632539']);
+
+        $model = new TurbineAddressModel();
         $this->assertEquals([
             'name' => 'Amaral1-1',
             'description' => 'Gamesa',
             'latitude' => '39.026628121',
             'longitude' => '-9.048632539'
-        ], TurbineAddressModel::find(1));
+        ], $model->find(1));
     }
 
 }
