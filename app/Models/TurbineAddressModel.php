@@ -57,6 +57,16 @@ class TurbineAddressModel extends Model
      */
     public static function update(int $id, array $data): bool
     {
+        $address = self::find($id);
+        $stmt = self::$db->prepare('UPDATE turbine_addresses SET name = :name, description = :description, latitude = :latitude, longitude = :longitude WHERE id = :id');
+        $stmt->execute([
+            'name' => $data['name'] ?? $address['name'],
+            'description' => $data['description'] ?? $address['description'],
+            'latitude' => $data['latitude'] ?? $address['latitude'],
+            'longitude' => $data['longitude'] ?? $address['longitude'],
+            'id' => $id
+        ]);
+        return $stmt->rowCount() > 0;
     }
 
     /**

@@ -73,7 +73,13 @@ class TurbineAddressController extends Controller
      */
     public function update(Request $request) : mixed
     {
-        return null;
+        $id = $request->getSegment(0);
+        $data = $request->getParams();
+        $updated = TurbineAddressModel::update($id, $data);
+        if ($updated) {
+            return Response::toJson(['message' => 'Address updated'], 200);
+        }
+        return Response::toJson(['message' => 'Address not found'], 404);
     }
 
     /**
