@@ -16,12 +16,8 @@ class RouterTest extends TestCase
      */
     public function testGetStringResponse()
     {
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/address/test';
-        $this->expectOutputString('Hello World');
-        Router::get('/address/test', function() {
-            return 'Hello World';
-        });
+        $method = 'GET';
+        $this->testStringResponse($method, strtolower($method));
     }
 
     /**
@@ -29,37 +25,17 @@ class RouterTest extends TestCase
      */
     public function testGetJsonResponse()
     {
-        $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_SERVER['REQUEST_URI'] = '/address/test';
-        $response = [
-            'status' => 'success',
-            'message' => 'Hello World',
-        ];
-
-        // Test with array
-        $this->expectOutputString('{"status":"success","message":"Hello World"}');
-        Router::get('/address/test', function() use ($response) {
-            return $response;
-        });
-
-        // clear output buffer
-        ob_clean();
-
-        // Test with object
-        Router::get('/address/test', function() use ($response) {
-            return (object) $response;
-        });
+        $method = 'GET';
+        $this->testJsonResponse($method, strtolower($method));
     }
 
+    /**
+     * @runInSeparateProcess
+     */
     public function testGetWrongHttpMethod()
     {
-        $_SERVER['REQUEST_METHOD'] = 'PUT';
-        $_SERVER['REQUEST_URI'] = '/address/test';
-
-        $this->expectException(MethodNotAllowedHttpException::class);
-        Router::get('/address/test', function() {
-            return 'Hello World';
-        });
+        $method = 'GET';
+        $this->testWrongHttpMethod($method, strtolower($method));
     }
 
     /**
@@ -67,12 +43,8 @@ class RouterTest extends TestCase
      */
     public function testPostStringResponse()
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_SERVER['REQUEST_URI'] = '/address/test';
-        $this->expectOutputString('Hello World');
-        Router::post('/address/test', function() {
-            return 'Hello World';
-        });
+        $method = 'POST';
+        $this->testStringResponse($method, strtolower($method));
     }
 
     /**
@@ -80,7 +52,32 @@ class RouterTest extends TestCase
      */
     public function testPostJsonResponse()
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $method = 'POST';
+        $this->testJsonResponse($method, strtolower($method));
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPostWrongHttpMethod()
+    {
+        $method = 'POST';
+        $this->testWrongHttpMethod($method, strtolower($method));
+    }
+
+    private function testStringResponse(string $httpMethod, string $method)
+    {
+        $_SERVER['REQUEST_METHOD'] = $httpMethod;
+        $_SERVER['REQUEST_URI'] = '/address/test';
+        $this->expectOutputString('Hello World');
+        Router::$method('/address/test', function() {
+            return 'Hello World';
+        });
+    }
+
+    private function testJsonResponse(string $httpMethod, string $method)
+    {
+        $_SERVER['REQUEST_METHOD'] = $httpMethod;
         $_SERVER['REQUEST_URI'] = '/address/test';
         $response = [
             'status' => 'success',
@@ -89,7 +86,7 @@ class RouterTest extends TestCase
 
         // Test with array
         $this->expectOutputString('{"status":"success","message":"Hello World"}');
-        Router::post('/address/test', function() use ($response) {
+        Router::$method('/address/test', function() use ($response) {
             return $response;
         });
 
@@ -97,18 +94,18 @@ class RouterTest extends TestCase
         ob_clean();
 
         // Test with object
-        Router::post('/address/test', function() use ($response) {
+        Router::$method('/address/test', function() use ($response) {
             return (object) $response;
         });
     }
 
-    public function testPostWrongHttpMethod()
+    private function testWrongHttpMethod(string $httpMethod, string $method)
     {
-        $_SERVER['REQUEST_METHOD'] = 'PUT';
+        $_SERVER['REQUEST_METHOD'] = $httpMethod;
         $_SERVER['REQUEST_URI'] = '/address/test';
 
         $this->expectException(MethodNotAllowedHttpException::class);
-        Router::get('/address/test', function() {
+        Router::$method('/address/test', function() {
             return 'Hello World';
         });
     }
