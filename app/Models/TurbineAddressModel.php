@@ -39,6 +39,14 @@ class TurbineAddressModel extends Model
      */
     public static function create(array $data): mixed
     {
+        $stmt = self::$db->prepare('INSERT INTO turbine_addresses (name, description, latitude, longitude) VALUES (:name, :description, :latitude, :longitude)');
+        $stmt->execute([
+            'name' => $data['name'],
+            'description' => $data['description'],
+            'latitude' => $data['latitude'],
+            'longitude' => $data['longitude']
+        ]);
+        return self::find(self::$db->lastInsertId());
     }
 
     /**

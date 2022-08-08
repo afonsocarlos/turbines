@@ -56,7 +56,9 @@ class TurbineAddressController extends Controller
      */
     public function store(Request $request) : mixed
     {
-        return null;
+        $data = $request->getParams();
+        $address = TurbineAddressModel::create($data);
+        return Response::toJson($address, 201);
     }
 
     /**
