@@ -9,10 +9,6 @@ use App\Models\TurbineAddressModel;
 
 class TurbineAddressController extends Controller
 {
-    public function __construct()
-    {
-        $this->loadTurbinesData();
-    }
 
     /**
      * @author Carlos Afonso
@@ -24,7 +20,8 @@ class TurbineAddressController extends Controller
      */
     public function index(Request $request): mixed
     {
-        return $this->addresses;
+        $addresses = TurbineAddressModel::all();
+        return Response::toJson($addresses, 200);
     }
 
     /**
@@ -86,26 +83,6 @@ class TurbineAddressController extends Controller
     public function destroy(Request $request) : mixed
     {
         return null;
-    }
-
-    /**
-     * @author Carlos Afonso
-     * @date 2022-08-06
-     *
-     * Load turbines data into $addresses
-     */
-    private function loadTurbinesData() : void
-    {
-        $file = fopen(__DIR__ . '/../../turbines.csv', 'r');
-        while (($line = fgetcsv($file)) !== FALSE) {
-            $this->addresses[] = [
-                $line[0],
-                $line[1],
-                $line[2]
-            ];
-        }
-
-        fclose($file);
     }
 
 }

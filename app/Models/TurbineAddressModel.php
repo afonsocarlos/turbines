@@ -26,6 +26,9 @@ class TurbineAddressModel extends Model
      */
     public static function all(): array
     {
+        $stmt = self::$db->query('SELECT * FROM turbine_addresses');
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     /**
