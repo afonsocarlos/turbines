@@ -47,3 +47,23 @@ Cover the code with Unit Tests or even better, build it using a TDD approach!
 # Support
 
 Should you have any questions or concerns, please do get in touch.
+
+# Run the code
+
+First, run composer install.
+```bash
+$ composer install
+```
+
+Then, run the database migration script.
+```bash
+$ php database/migrations/2022_08_08_120736_create_turbines_table.php
+```
+
+Finally, run the application.
+
+You can run it with docker setting the apache/nginx location to the public directory.
+Or you can run it locally with the following command.
+```bash
+$ cd public && php -S localhost:8080
+```
