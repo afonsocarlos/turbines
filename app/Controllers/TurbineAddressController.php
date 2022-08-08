@@ -94,7 +94,11 @@ class TurbineAddressController extends Controller
      */
     public function destroy(Request $request) : mixed
     {
-        return null;
+        $deleted = TurbineAddressModel::delete($request->getSegment(0));
+        if ($deleted) {
+            return Response::toJson(['message' => 'Address deleted'], 200);
+        }
+        return Response::toJson(['message' => 'Address not found'], 404);
     }
 
 }

@@ -77,5 +77,8 @@ class TurbineAddressModel extends Model
      */
     public static function delete(int $id): bool
     {
+        $stmt = self::$db->prepare('DELETE FROM turbine_addresses WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+        return $stmt->rowCount() > 0;
     }
 }
