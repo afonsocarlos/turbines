@@ -25,7 +25,7 @@ class TurbineAddressController extends Controller
      */
     public function index(Request $request): mixed
     {
-        return null;
+        return $this->addresses;
     }
 
     /**

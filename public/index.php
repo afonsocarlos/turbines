@@ -9,10 +9,10 @@ use App\Lib\App;
 
 App::run();
 
-Router::get('/address/([0-9]*)', function($param) {
-    $controller = new TurbineAddressController();
-    $return = $controller->getTurbineData($param[0]);
-    echo $return;
-});
+// -------------------- Turbine Address Routes --------------------
+$controller = new TurbineAddressController();
+Router::post('/address', [$controller, 'store']);
+Router::get('/address', [$controller, 'index']);
+Router::get('/address/([0-9]*)', [$controller, 'show']);
 
 Router::handleNotFound();
