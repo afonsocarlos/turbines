@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use App\Exceptions\Handler;
+use App\Lib\Config;
 use App\Models\Model;
 use PDO;
 
@@ -12,7 +13,8 @@ class App
     public static function run()
     {
         Handler::setExceptionHandler();
-        Model::setUp(new PDO('sqlite:turbine.sqlite3'));
+        $db = new PDO(Config::get('database'));
+        Model::setUp($db);
     }
 
 }
