@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\Controller;
 use App\Lib\Request;
 
 
