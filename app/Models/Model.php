@@ -16,6 +16,7 @@ abstract class Model implements ModelInterface
     public static function setUp($db)
     {
         self::$db = $db;
+        self::$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
 }
