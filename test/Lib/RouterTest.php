@@ -6,6 +6,7 @@ use PHPUnit\Framework\TestCase;
 use App\Exceptions\MethodNotAllowedHttpException;
 use App\Exceptions\NotFoundHttpException;
 use App\Lib\Router;
+use App\Lib\Request;
 
 
 class RouterTest extends TestCase
@@ -133,8 +134,8 @@ class RouterTest extends TestCase
     public function testRoutePathParsing()
     {
         $_SERVER['REQUEST_URI'] = '/address/test/1';
-        $this->assertEquals(['test', '1'], Router::route('/address/([a-z]*)/([0-9]+)', function($params) {
-            return $params;
+        $this->assertEquals(['test', '1'], Router::route('/address/([a-z]*)/([0-9]+)', function(Request $request) {
+            return $request->getSegments();
         }));
     }
 

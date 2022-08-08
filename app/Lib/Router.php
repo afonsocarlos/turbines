@@ -4,6 +4,7 @@ namespace App\Lib;
 
 use App\Exceptions\MethodNotAllowedHttpException;
 use App\Exceptions\NotFoundHttpException;
+use App\Lib\Request;
 
 class Router
 {
@@ -76,7 +77,7 @@ class Router
             $params = array_map(function($param) {
                 return $param[0];
             }, $matches);
-            return $callback($params);
+            return $callback(new Request($params));
         }
 
         return null;

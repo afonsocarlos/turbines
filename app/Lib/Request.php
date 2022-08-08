@@ -56,6 +56,16 @@ class Request
     }
 
     /**
+     * Get specified param from params
+     *
+     * @return mixed
+     */
+    public function getParam(string $key): mixed
+    {
+        return $this->params[$key] ?? null;
+    }
+
+    /**
      * Getter for segments
      *
      * @return array
@@ -63,5 +73,15 @@ class Request
     public function getSegments(): array
     {
         return $this->segments;
+    }
+
+    /**
+     * Get specified segment from segments
+     *
+     * @return mixed
+     */
+    public function getSegment($index): mixed
+    {
+        return $this->segments[$index] ?? null;
     }
 }

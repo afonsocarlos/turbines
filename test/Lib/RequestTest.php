@@ -45,4 +45,19 @@ class RequestTest extends TestCase
         $this->assertEquals(['id' => 1, 'name' => 'John', 'age' => '30'], $request->getParams());
     }
 
+    public function testRequestRetrieveSingleSegment()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $request = new Request(segments: [1, 'test']);
+        $this->assertEquals('test', $request->getSegment(1));
+    }
+
+    public function testRequestRetrieveSingleParam()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET = ['id' => 1, 'name' => 'John'];
+        $request = new Request();
+        $this->assertEquals(1, $request->getParam('id'));
+    }
+
 }

@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Lib\Request;
+
+
 class TurbineAddressController
 {
     protected array $addresses = [];
@@ -19,12 +22,12 @@ class TurbineAddressController
      *
      * Returns the data from a turbine specified address.
      *
-     * @return string
+     * @return array
      */
-    public function getTurbineData(int $id) : string
+    public function show(Request $request) : array
     {
-        $address = $this->addresses[$id];
-        return json_encode($address);
+        $address = $this->addresses[$request->getSegment(0)];
+        return $address;
     }
 
     /**

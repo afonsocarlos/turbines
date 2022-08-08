@@ -4,6 +4,8 @@ namespace App\Test\Controllers;
 
 use PHPUnit\Framework\TestCase;
 use App\Controllers\TurbineAddressController;
+use App\Lib\Request;
+
 
 class TurbineAddressControllerTest extends TestCase
 {
@@ -27,9 +29,12 @@ class TurbineAddressControllerTest extends TestCase
      */
     public function testGetCorrectTurbineData()
     {
+        $request = $this->createMock(Request::class);
+        $request->method('getSegment')->willReturn(0);
+
         $turbineController = new TurbineAddressController();
-        $response = $turbineController->getTurbineData(0);
-        $this->assertEquals('["Amaral1-1"," Gamesa"," 39.026628121"]', $response);
+        $response = $turbineController->show($request);
+        $this->assertEquals(["Amaral1-1"," Gamesa"," 39.026628121"], $response);
     }
 
     /**
@@ -40,9 +45,12 @@ class TurbineAddressControllerTest extends TestCase
      */
     public function testGetWrongTurbineData()
     {
+        $request = $this->createMock(Request::class);
+        $request->method('getSegment')->willReturn(0);
+
         $turbineController = new TurbineAddressController();
-        $response = $turbineController->getTurbineData(0);
-        $this->assertNotEquals('["Amaral1-2"," Wrong output"," 3.141592653"]', $response);
+        $response = $turbineController->show($request);
+        $this->assertNotEquals(["Amaral1-2"," Wrong output"," 3.141592653"], $response);
     }
 
 }
